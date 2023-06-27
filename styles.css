@@ -1,0 +1,194 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: radial-gradient(134.34% 134.34% at 50% 0%, #1F3757 0%, #131537 100%);
+    font-size: 11px; 
+    color: white;
+    font-family: 'Barlow Semi Condensed', sans-serif; 
+    /* display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; */
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 700px;
+    height: 150px;
+    border: 3px solid rgba(255, 255, 255, 0.289199);
+    border-radius: 15px;
+    margin: 48px auto;
+    padding: 18px 24px 18px 24px;
+}
+
+.header img {
+    width: 155px;
+    height: 93px;
+}
+
+.scorecard {
+    background-color: white;
+    border-radius: 5px;
+    width: 150px;
+    height: 114px;  
+    padding: 30px 47px;
+}
+
+.scorecard-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 55px;
+    height: 83px;
+}
+.score-text {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+    letter-spacing: 2.5px;
+    color: #2A45C2;
+}
+
+.score-num {
+    margin-top: -15px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 64px;
+    line-height: 64px;
+    color: #565468;
+}
+
+.who-picked-what {
+    display: none;
+    justify-content: space-between;
+    width: 550px;
+    text-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.20);
+    font-size: 24px;
+    font-family: Barlow Semi Condensed;
+    font-weight: 700;
+    line-height: 32px;
+    letter-spacing: 3px;
+    margin: auto;
+    text-align: center;
+}
+/* .choices {
+    width: 198px;
+    height: 194px;
+    background-color: #4664F4;
+
+    background: #2A45C2;
+    box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.196706);
+    border-radius: 50%;
+} */
+.game {
+    width: 476px;
+    height: 430px;
+    margin: auto;
+    text-align: center;
+    /* display; fl */
+}
+
+.white-background {
+    background-color: white;
+    width: 152px;
+    height: 152px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    /* background: linear-gradient(inset 0deg, #F3F3F3 0%, #DADADA 100%); */
+}
+
+.choice-image {
+    width: 73px;
+    height: 86px;
+    /* fill: red; */
+}
+
+#image-triangle {
+    margin-top: 163px;
+    z-index: 1;
+    position: relative;
+}
+
+.thick-border {
+    width: 198px;
+    height: 203px;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+
+/* Below are the border colours */
+.blue {
+    background-color: #2A45C2;
+}
+
+.orange {
+    background-color: orange;
+}
+
+.red {
+    background: rgb(172, 33, 33);
+}
+
+.choice1 {
+    position: absolute;
+    top: 320px;
+    left: 445px;
+    z-index: 2; 
+    cursor: pointer;
+}
+
+.choice2 {
+    position: absolute;
+    top: 320px;
+    right: 445px;
+    z-index: 2;
+    cursor: pointer;
+    /* float: right;
+    margin-top: -200px; */
+}
+
+.choice3 {
+    position: absolute;
+    top: 525px; 
+    left: 570px;
+    z-index: 2;
+    cursor: pointer;
+    /* margin-bottom: 50px; */
+    /* margin: auto;
+    text-align: center; */
+}
+
+button {
+    margin-top: 100px;
+    width: 128px;
+    height: 40px;
+    background-color: transparent;
+    color: #FFF;
+    text-align: center;
+    font-size: 16px;
+    font-family: Barlow Semi Condensed;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    border: 1px solid white;
+    border-radius: 8px;
+    text-transform: uppercase;
+    float: right;
+    right: 30px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: white;
+    color: #3B4262;
+}
