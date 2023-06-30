@@ -108,12 +108,12 @@ function handlePaperClick() {
 	if (result === 'rock') {
 		// console.log("You have won");
 		h2.innerHTML = 'You won';
-		score.innerHTML = initialScore++;
+		score.innerHTML = ++initialScore;
 		displayResult.style.display = 'flex';
 	} else if (result === 'scissors') {
 		// console.log('You have lost');
 		h2.innerHTML = 'You lost';
-		score.innerHTML = initialScore--;
+		score.innerHTML = --initialScore;
 		displayResult.style.display = 'flex';
 	} else {
 		// console.log("There is a tie");
@@ -143,12 +143,12 @@ scissorsDiv.addEventListener('click', () => {
 	if (result === 'paper') {
 		// console.log("You have won");
 		h2.innerHTML = 'You won';
-		score.innerHTML = initialScore++;
+		score.innerHTML = ++initialScore;
 		displayResult.style.display = 'flex'
 	} else if (result === 'rock') {
 		// console.log('You have lost');
 		h2.innerHTML = 'You lost';
-		score.innerHTML = initialScore--;
+		score.innerHTML = --initialScore;
 		displayResult.style.display = 'flex';
 	} else {
 		// console.log("There is a tie");
@@ -179,12 +179,12 @@ rockDiv.addEventListener('click', () => {
 	if (result === 'scissors') {
 		// console.log("You have won");
 		h2.innerHTML = 'You won';
-		score.innerHTML = initialScore++;
+		score.innerHTML = ++initialScore;
 		displayResult.style.display = 'flex'
 	} else if (result === 'paper') {
 		// console.log("You have lost");
 		h2.innerHTML = 'You lost';
-		score.innerHTML = initialScore--;
+		score.innerHTML = --initialScore;
 		displayResult.style.display = 'flex'
 	} else {
 		// console.log("There is a tie");
