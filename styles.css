@@ -76,6 +76,7 @@ body {
     letter-spacing: 3px;
     margin: auto;
     text-align: center;
+    margin-bottom: 63px;
 }
 /* .choices {
     width: 198px;
@@ -140,7 +141,7 @@ body {
     background: rgb(172, 33, 33);
 }
 
-.choice1 {
+.paper {
     position: absolute;
     top: 320px;
     left: 445px;
@@ -148,7 +149,7 @@ body {
     cursor: pointer;
 }
 
-.choice2 {
+.scissors{
     position: absolute;
     top: 320px;
     right: 445px;
@@ -158,7 +159,7 @@ body {
     margin-top: -200px; */
 }
 
-.choice3 {
+.rock {
     position: absolute;
     top: 525px; 
     left: 570px;
@@ -169,7 +170,7 @@ body {
     text-align: center; */
 }
 
-button {
+.rules > button {
     margin-top: 100px;
     width: 128px;
     height: 40px;
@@ -188,7 +189,25 @@ button {
     cursor: pointer;
 }
 
-button:hover {
+.rules > button:hover {
     background-color: white;
     color: #3B4262;
+}
+
+.second-screen {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 600px;
+    margin: auto;
+    text-align: center;
+}
+
+.result-display {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 75px;
+    width: 220px;
 }
