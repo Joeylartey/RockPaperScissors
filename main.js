@@ -88,7 +88,7 @@ gameDiv.appendChild(rockDiv);
 paperDiv.addEventListener('click', handlePaperClick);
 
 function handlePaperClick() {
-	
+	resetGame();
 	gameDiv.style.display = 'none';
 	whoPickedWhat.style.display = 'flex';
 	secondScreen.style.display = 'flex';
@@ -108,12 +108,12 @@ function handlePaperClick() {
 	if (result === 'rock') {
 		// console.log("You have won");
 		h2.innerHTML = 'You won';
-		score.innerHTML = initialScore + 1;
+		score.innerHTML = initialScore++;
 		displayResult.style.display = 'flex';
 	} else if (result === 'scissors') {
 		// console.log('You have lost');
 		h2.innerHTML = 'You lost';
-		score.innerHTML = initialScore - 1;
+		score.innerHTML = initialScore--;
 		displayResult.style.display = 'flex';
 	} else {
 		// console.log("There is a tie");
@@ -123,6 +123,7 @@ function handlePaperClick() {
 }
 
 scissorsDiv.addEventListener('click', () => {
+	resetGame();
 	gameDiv.style.display = 'none';
 	whoPickedWhat.style.display = 'flex';
 	secondScreen.style.display = 'flex';
@@ -142,12 +143,12 @@ scissorsDiv.addEventListener('click', () => {
 	if (result === 'paper') {
 		// console.log("You have won");
 		h2.innerHTML = 'You won';
-		score.innerHTML = initialScore + 1;
+		score.innerHTML = initialScore++;
 		displayResult.style.display = 'flex'
 	} else if (result === 'rock') {
 		// console.log('You have lost');
 		h2.innerHTML = 'You lost';
-		score.innerHTML = initialScore - 1;
+		score.innerHTML = initialScore--;
 		displayResult.style.display = 'flex';
 	} else {
 		// console.log("There is a tie");
@@ -157,6 +158,7 @@ scissorsDiv.addEventListener('click', () => {
 });
 
 rockDiv.addEventListener('click', () => {
+	resetGame(); 
 	gameDiv.style.display = 'none';
 	whoPickedWhat.style.display = 'flex';
 	secondScreen.style.display = 'flex';
@@ -177,12 +179,12 @@ rockDiv.addEventListener('click', () => {
 	if (result === 'scissors') {
 		// console.log("You have won");
 		h2.innerHTML = 'You won';
-		score.innerHTML = initialScore + 1;
+		score.innerHTML = initialScore++;
 		displayResult.style.display = 'flex'
 	} else if (result === 'paper') {
 		// console.log("You have lost");
 		h2.innerHTML = 'You lost';
-		score.innerHTML = initialScore - 1;
+		score.innerHTML = initialScore--;
 		displayResult.style.display = 'flex'
 	} else {
 		// console.log("There is a tie");
@@ -218,7 +220,7 @@ function generateComputerDiv() {
 			computerChoice = 'scissors';
 			break;
 	}
-	return computerChoice
+	return computerChoice;
 }
 
 function generatePaperDiv() {
@@ -295,5 +297,12 @@ function generateRockDiv() {
 	rockDiv.style.transform = 'scale(1.5)';
 }
 
+function resetGame() {
+	// Remove the paperDiv, scissorsDiv, and rockDiv from the secondScreen
+	while (secondScreen.firstChild) {
+	  secondScreen.removeChild(secondScreen.firstChild);
+	}
+  }
+  
 
 
