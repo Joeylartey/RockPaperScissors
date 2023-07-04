@@ -274,7 +274,66 @@ body {
     }
   }
 
-  
+  @media(max-width: 375px){
+   
+
+	.header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        width: 311px;
+        height: 96px;
+
+        border: 3px solid rgba(255, 255, 255, 0.289199);
+
+        border-radius: 5px;
+        margin: 32px 32px 0px 32px;
+        padding: 12px 12px 12px 23px;
+        text-align: center;
+    }
+
+    .header > img {
+        width: 83px;
+        height: 48px;
+    }
+
+    .scorecard {
+        background-color: white;
+        border-radius: 5px;
+        width: 80px;
+        height: 72px;  
+        padding: 10px 24px;
+    }
+
+    .scorecard-content {
+        padding-top: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 33px;
+        height: 52px;
+    }
+
+    .score-text {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 10px;
+        line-height: normal;
+        letter-spacing: 1.5px;
+        color: #2A45C2;
+    }
+
+    .score-num {
+        margin-top: -15px;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 40px;
+        line-height: 40px;
+        color: #565468;
+    }
+}
    
 
 
