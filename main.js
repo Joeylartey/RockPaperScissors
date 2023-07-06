@@ -10,8 +10,32 @@ secondScreen.className = 'second-screen';
 // Display button for the secondScreen
 const displayButton = document.createElement('button');
 
+// May not need to use this
 const rules = document.querySelector('.rules');
 
+// May delete the following block:
+const btnRules = document.querySelector(".rules-btn");
+const btnClose = document.querySelector(".close-btn");
+const modalRules = document.querySelector(".modal");
+
+// Show/Hide Rules
+btnRules.addEventListener("click", () => {
+	modalRules.classList.toggle("show-modal");
+  });
+  btnClose.addEventListener("click", () => {
+	modalRules.classList.toggle("show-modal");
+  });
+  
+  // Dealing with media queries for mobile
+  const mediaQuery = window.matchMedia('(max-width: 375px)');
+
+  const handleMatches = (mediaQuery) => {
+	if (mediaQuery.matches) { 
+		paperDiv.style.transform = 'scale(0.65)';
+	} else {
+		paperDiv.style.transform = 'scale(1.5)';
+	}
+}
 // Create the image element with the id "image-triangle"
 const imageTriangle = document.createElement('img');
 imageTriangle.src = "./images/bg-triangle.svg";
@@ -84,14 +108,27 @@ function handlePaperClick() {
 			h2.innerHTML = 'You won';
 			score.innerHTML = ++initialScore;
 			secondScreen.firstChild.classList.add('ripple-effect');
+			console.log(secondScreen.firstChild);
+			// console.log(secondScreen);
 		} else if (result === 'scissors') {
 			h2.innerHTML = 'You lost';
 			score.innerHTML = --initialScore;
-			// secondScreen.secondChild.classList.add('ripple-effect');
+			console.log(secondScreen);
+			secondScreen.lastChild.classList.add('ripple-effect');
+			console.log(secondScreen.lastChild);
 		} else { 
 			h2.innerHTML = 'There is a tie';
+			console.log(secondScreen);
 		}
 	}, 1000)
+	
+	// This is what secondScreen outputs
+	// <div id="second-screen" class="second-screen" style="display: flex; margin-left: 200px; width: 936px;">
+	// <div class="ripple-effect" style="transform: scale(1.5);"><img src="./my_images/paperDiv.svg" alt="Paper">
+	// </div><div class="blackbox" style="display: none;"></div><div class="result-display" style="display: flex;">
+	// <h2>You won</h2><button>Play Again</button>
+	// </div><div style="transform: scale(1.5);"><img src="./my_images/rockDiv.svg" alt="Rock"></div></div>
+
 
 	setTimeout(() => {
 		displayResult.style.display = 'flex';
@@ -138,6 +175,7 @@ scissorsDiv.addEventListener('click', () => {
 		} else if (result === 'rock') {
 			h2.innerHTML = 'You lost';
 			score.innerHTML = --initialScore;
+			secondScreen.lastChild.classList.add('ripple-effect');
 		} else {
 			h2.innerHTML = 'There is a tie';
 		}
@@ -187,6 +225,7 @@ rockDiv.addEventListener('click', () => {
 		} else if (result === 'paper') {
 			h2.innerHTML = 'You lost';
 			score.innerHTML = --initialScore;
+			secondScreen.lastChild.classList.add('ripple-effect');
 		} else {
 			h2.innerHTML = 'There is a tie';
 		}
@@ -215,15 +254,15 @@ displayButton.addEventListener('click', () => {
 	whoPickedWhat.style.width = '550px';
 });
 
-rules.addEventListener('click', () => {
-	console.log("I have been clicked");
+// rules.addEventListener('click', () => {
+// 	console.log("I have been clicked");
 
-	const rulesImage = document.createElement('img');
-	rulesImage.src = './images/image-rules.svg';
-	rulesImage.alt = 'Rules';
-	rulesImage.className = 'rules-image';
-	rules.appendChild(rulesImage);
-})
+// 	const rulesImage = document.createElement('img');
+// 	rulesImage.src = './images/image-rules.svg';
+// 	rulesImage.alt = 'Rules';
+// 	rulesImage.className = 'rules-image';
+// 	rules.appendChild(rulesImage);
+// })
 
 function generateComputerDiv() {
 	let randomNumber = Math.floor(Math.random() * 3)
@@ -254,7 +293,8 @@ function generatePaperDiv() {
 	paperDiv.appendChild(paperImg);
 
 	secondScreen.appendChild(paperDiv);
-	paperDiv.style.transform = 'scale(1.5)';
+	paperDiv.style.transform = 'scale(1.5)'
+
 }
 
 function generateScissorsDiv() {
@@ -264,9 +304,11 @@ function generateScissorsDiv() {
 	scissorsImg.src = './my_images/scissorsDiv.svg';
 	scissorsImg.alt = 'Scissors';
 	scissorsDiv.appendChild(scissorsImg);
-
+	
+	scissorsDiv.classList.add('smaller');
 	secondScreen.appendChild(scissorsDiv);
-	scissorsDiv.style.transform = 'scale(1.5)';
+	scissorsDiv.style.transform = 'scale(1.5)'
+	
 }
 
 function generateRockDiv() {
@@ -278,7 +320,8 @@ function generateRockDiv() {
 	rockDiv.appendChild(rockImg);
 
 	secondScreen.appendChild(rockDiv);
-	rockDiv.style.transform = 'scale(1.5)';
+	
+	rockDiv.style.transform = 'scale(1.5)'
 }
 
 function resetGame() {

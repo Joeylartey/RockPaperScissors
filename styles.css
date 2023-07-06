@@ -2,11 +2,30 @@
     box-sizing: border-box;
 }
 
+:root {
+    --light-text: #ffffff;
+    --dark-text: hsl(229, 25%, 31%);
+    --score-text: hsl(229, 64%, 46%);
+    --outline: hsl(217, 16%, 45%);
+    --bg-grad-1: hsl(214, 47%, 23%);
+    --bg-grad-2: hsl(237, 49%, 15%);
+    --scissors-1: hsl(39, 89%, 49%);
+    --scissors-2: hsl(40, 84%, 53%);
+    --paper-1: hsl(230, 89%, 62%);
+    --paper-2: hsl(230, 89%, 65%);
+    --rock-1: hsl(349, 71%, 52%);
+    --rock-2: hsl(349, 70%, 56%);
+    --shadow-light: #00000026;
+    --shadow-med: #0000004d;
+}
+
 body {
-    background: radial-gradient(134.34% 134.34% at 50% 0%, #1F3757 0%, #131537 100%);
+    background: radial-gradient(at top, var(--bg-grad-1), var(--bg-grad-2));
     font-size: 11px; 
     color: white;
     font-family: 'Barlow Semi Condensed', sans-serif; 
+    text-transform: uppercase;
+    min-height: 100%;
 }
 
 .header {
@@ -105,8 +124,13 @@ body {
 }
 .paper:hover {
     border-radius: 50%;
-    box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.25); 
+    /* box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.25);  */
+    box-shadow: 0 0 0 2rem #223351;
 }
+
+.smaller {
+    transform: scale(1);
+   }
 
 .scissors{
     position: absolute; 
@@ -118,7 +142,7 @@ body {
 
 .scissors:hover {
     border-radius: 50%;
-    box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.25); 
+    box-shadow: 0 0 0 2rem #223351; 
 }
 
 .rock {
@@ -127,11 +151,14 @@ body {
     left: 140px;
     z-index: 2;
     cursor: pointer;
+
+    /* width: 198px;
+    height: 203px; */
 }
 
 .rock:hover {
     border-radius: 50%;
-    box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.25); 
+    box-shadow: 0 0 0 2rem #223351;
 }
 
 .rules > button {
@@ -239,43 +266,94 @@ body {
 
 /* Ripple Effect Generator */
 .ripple-effect {
-    position: relative;
-    overflow: hidden;
-    display: inline-block; /* Ensures the element expands to fit its content */
-  }
-  
-  .ripple-effect::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100%;
-    height: 100%;
+    box-shadow: 0 0 0 40px rgba(41, 50, 81, 0.9), 0 0 0 80px rgba(35, 44, 75, 0.9), 0 0 0 130px rgba(30, 40, 72, 0.9);
+    animation: winner 1s ease forwards; 
     border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.5);
-    opacity: 0;
-    animation: rippleAnimation 1s linear infinite;
-    animation-fill-mode: both;
-  }
-  
-  @keyframes rippleAnimation {
-    0% {
+    z-index: -1;
+}
+
+@keyframes winner {
+    from {
       opacity: 0;
-      transform: translate(-50%, -50%) scale(0.1);
     }
-    50% {
-      opacity: 0.3;
-      transform: translate(-50%, -50%) scale(1);
-    }
-    100% {
-      opacity: 0;
-      transform: translate(-50%, -50%) scale(2);
+    to {
+      opacity: 1;
     }
   }
 
+  .hidden {
+    display: none;
+  }
+
+/* Some files from codeStackr */
+  /* Rules Button */
+.rules-btn {
+    position: absolute;
+    bottom: -5rem; /*changed */
+    right: 2rem;
+    background: none;
+    outline: none;
+    border: 2px solid var(--outline);
+    border-radius: 0.6rem;
+    color: var(--light-text);
+    padding: 0.6rem 2.5rem;
+    font-family: inherit;
+    text-transform: inherit;
+    font-size: 1.3rem;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+  }
+  .rules-btn:hover {
+    border: 2px solid #fff;
+    background: #fff;
+    color: #000;
+  }
+  
+  /* Rules Modal */
+  .modal {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    display: grid;
+    place-items: center;
+    background: var(--shadow-med);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    pointer-events: none;
+    z-index: 999;
+  }
+  .modal__container {
+    background: #fff;
+    border-radius: 0.5rem;
+  }
+  .modal__header {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding: 2rem 2rem 1rem;
+  }
+  .modal__heading {
+    font-size: 1.5rem;
+    color: var(--dark-text);
+  }
+  .close-btn {
+    border: none;
+    outline: none;
+    background: none;
+    cursor: pointer;
+  }
+  .rules-img {
+    padding: 2rem 4rem;
+  }
+  .show-modal {
+    opacity: 1;
+    pointer-events: initial;
+  }
+  
+
   @media(max-width: 375px){
-   
 
 	.header {
         display: flex;
@@ -333,6 +411,66 @@ body {
         line-height: 40px;
         color: #565468;
     }
+
+    .game {
+        position: relative;
+        width: 312px;
+        height: 282px;
+        margin: auto;
+        text-align: center;
+    }
+
+    .image-triangle {
+        margin-top: 164px;
+        z-index: 1;
+        width: 166px;
+        height: 188px;
+    }
+
+    .paper {
+        position: absolute;
+        top: 70px;
+        left: -30px;
+        z-index: 2; 
+        cursor: pointer;
+        transform: scale(0.65);
+
+    }
+
+    .scissors{
+        position: absolute; 
+        top: 70px;
+        right: -30px; 
+        z-index: 2;
+        cursor: pointer;
+        transform: scale(0.65);
+    }
+
+    .rock {
+        position: absolute;
+        top: 225px; 
+        left: 55px;
+        z-index: 2;
+        cursor: pointer;
+        transform: scale(0.65);
+    }
+
+    .second-screen {
+        display: none;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 318px;
+        margin-top: 75px;
+        margin-left: 385px;
+        padding-right: 40px;
+        text-align: center;
+    }
+
+   .smaller {
+    transform: scale(0.65);
+   }
+    
 }
    
 
