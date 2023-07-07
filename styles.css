@@ -573,7 +573,7 @@ body {
   letter-spacing: 0.1em;
   cursor: pointer;
 }
-/* .modal.show-modal {
+.modal.show-modal {
   position: fixed;
   top: 0;
   left: 0;
@@ -584,5 +584,5 @@ body {
   align-items: center;
   justify-content: center;
   z-index: 9999;
-} */
+  }
 }
