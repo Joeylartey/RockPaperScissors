@@ -1,335 +1,125 @@
-let score = document.querySelector('.score-num');
-let initialScore = 0;
-const whoPickedWhat = document.querySelector(".who-picked-what");
-const gameDiv = document.getElementById("game");
-gameDiv.className = 'game';
-
-const secondScreen = document.getElementById('second-screen');
-secondScreen.className = 'second-screen';
-
-// Display button for the secondScreen
-const displayButton = document.createElement('button');
-
-// May not need to use this
-const rules = document.querySelector('.rules');
-
-// May delete the following block:
-const btnRules = document.querySelector(".rules-btn");
-const btnClose = document.querySelector(".close-btn");
-const modalRules = document.querySelector(".modal");
-
-// Show/Hide Rules
-btnRules.addEventListener("click", () => {
-	modalRules.classList.toggle("show-modal");
-  });
-  btnClose.addEventListener("click", () => {
-	modalRules.classList.toggle("show-modal");
+// Prevent animation on load
+setTimeout(() => {
+    document.body.classList.remove("preload");
+  }, 500);
+  
+  // DOM
+  const btnRules = document.querySelector(".rules-btn");
+  const btnClose = document.querySelector(".close-btn");
+  const modalRules = document.querySelector(".modal");
+  
+  const CHOICES = [
+    {
+      name: "paper",
+      beats: "rock",
+    },
+    {
+      name: "scissors",
+      beats: "paper",
+    },
+    {
+      name: "rock",
+      beats: "scissors",
+    },
+  ];
+  const choiceButtons = document.querySelectorAll(".choice-btn");
+  const gameDiv = document.querySelector(".game");
+  const resultsDiv = document.querySelector(".results");
+  const resultDivs = document.querySelectorAll(".results__result");
+  
+  const resultWinner = document.querySelector(".results__winner");
+  const resultText = document.querySelector(".results__text");
+  
+  const playAgainBtn = document.querySelector(".play-again");
+  
+  const scoreNumber = document.querySelector(".score__number");
+  let score = 0;
+  
+  // Game Logic
+  choiceButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const choiceName = button.dataset.choice;
+      const choice = CHOICES.find((choice) => choice.name === choiceName);
+      choose(choice);
+    });
   });
   
-  // Dealing with media queries for mobile
-  const mediaQuery = window.matchMedia('(max-width: 375px)');
-
-  const handleMatches = (mediaQuery) => {
-	if (mediaQuery.matches) { 
-		paperDiv.style.transform = 'scale(0.65)';
-	} else {
-		paperDiv.style.transform = 'scale(1.5)';
-	}
-}
-// Create the image element with the id "image-triangle"
-const imageTriangle = document.createElement('img');
-imageTriangle.src = "./images/bg-triangle.svg";
-imageTriangle.alt = "Rock";
-imageTriangle.className = "image-triangle";
-gameDiv.appendChild(imageTriangle);
-
-// Create PaperDiv
-const paperDiv = document.createElement('div')
-const paperImg = document.createElement('img');
-paperImg.src = './my_images/paperDiv.svg';
-paperImg.alt = 'Paper';
-paperDiv.appendChild(paperImg);
-paperDiv.className = "paper";
-
-gameDiv.appendChild(paperDiv);
-
-// Create ScissorsDiv
-const scissorsDiv = document.createElement('div');
-const scissorsImg = document.createElement('img');
-scissorsImg.src = './my_images/scissorsDiv.svg';
-scissorsImg.alt = 'Scissors';
-scissorsDiv.appendChild(scissorsImg);
-scissorsDiv.className = 'scissors';
-
-gameDiv.appendChild(scissorsDiv);
-
-// Create rockDiv
-const rockDiv = document.createElement('div');
-const rockImg = document.createElement('img');
-rockImg.src = './my_images/rockDiv.svg';
-rockImg.alt = 'Rock';
-rockDiv.appendChild(rockImg)
-rockDiv.className = 'rock';
-
-gameDiv.appendChild(rockDiv);
-
-// Add an click event listener to the paperDiv
-paperDiv.addEventListener('click', handlePaperClick);
-
-function handlePaperClick() {
-	resetGame();
-	gameDiv.style.display = 'none';
-	whoPickedWhat.style.display = 'flex';
-	secondScreen.style.display = 'flex';
-	generatePaperDiv();
-
-	const blackboxDiv = document.createElement('div');
-	blackboxDiv.className = 'blackbox';
-	secondScreen.appendChild(blackboxDiv);
-
-	setTimeout(() => {
-		blackboxDiv.style.display = "none";
-	}, 500)
-
-	const displayResult = document.createElement('div');
-	displayResult.className = 'result-display';
-	let h2 = document.createElement('h2');
-	h2.innerHTML = '';
-
-	// const displayButton = document.createElement('button');
-	displayButton.textContent = 'Play Again';
-	displayResult.appendChild(h2);
-	displayResult.appendChild(displayButton);
-	secondScreen.appendChild(displayResult);
-
-	setTimeout(() => {
-		const result = generateComputerDiv();
-		if (result === 'rock') {
-			h2.innerHTML = 'You won';
-			score.innerHTML = ++initialScore;
-			secondScreen.firstChild.classList.add('ripple-effect');
-			console.log(secondScreen.firstChild);
-			// console.log(secondScreen);
-		} else if (result === 'scissors') {
-			h2.innerHTML = 'You lost';
-			score.innerHTML = --initialScore;
-			console.log(secondScreen);
-			secondScreen.lastChild.classList.add('ripple-effect');
-			console.log(secondScreen.lastChild);
-		} else { 
-			h2.innerHTML = 'There is a tie';
-			console.log(secondScreen);
-		}
-	}, 1000)
-	
-	// This is what secondScreen outputs
-	// <div id="second-screen" class="second-screen" style="display: flex; margin-left: 200px; width: 936px;">
-	// <div class="ripple-effect" style="transform: scale(1.5);"><img src="./my_images/paperDiv.svg" alt="Paper">
-	// </div><div class="blackbox" style="display: none;"></div><div class="result-display" style="display: flex;">
-	// <h2>You won</h2><button>Play Again</button>
-	// </div><div style="transform: scale(1.5);"><img src="./my_images/rockDiv.svg" alt="Rock"></div></div>
-
-
-	setTimeout(() => {
-		displayResult.style.display = 'flex';
-		secondScreen.style.marginLeft = '200px';
-		secondScreen.style.width = '936px';
-		whoPickedWhat.style.marginLeft = '235px';
-		whoPickedWhat.style.width = '870px';
-	}, 1500)
-		
-}
-
-scissorsDiv.addEventListener('click', () => {
-	resetGame();
-	gameDiv.style.display = 'none';
-	whoPickedWhat.style.display = 'flex';
-	secondScreen.style.display = 'flex';
-	generateScissorsDiv();
-
-	// New Additions
-	const blackboxDiv = document.createElement('div');
-	blackboxDiv.className = 'blackbox';
-	secondScreen.appendChild(blackboxDiv);
-
-	setTimeout(() => {
-		blackboxDiv.style.display = "none";
-	}, 500)
-
-	const displayResult = document.createElement('div');
-	displayResult.className = 'result-display';
-	let h2 = document.createElement('h2');
-	h2.innerHTML = '';
-	
-	displayButton.textContent = 'Play Again';
-	displayResult.appendChild(h2);
-	displayResult.appendChild(displayButton);
-	secondScreen.appendChild(displayResult);
-
-	setTimeout(() => {
-	 	const result = generateComputerDiv();
-		if (result === 'paper') {
-			h2.innerHTML = 'You won';
-			score.innerHTML = ++initialScore;
-			secondScreen.firstChild.classList.add('ripple-effect');
-		} else if (result === 'rock') {
-			h2.innerHTML = 'You lost';
-			score.innerHTML = --initialScore;
-			secondScreen.lastChild.classList.add('ripple-effect');
-		} else {
-			h2.innerHTML = 'There is a tie';
-		}
-	}, 1000)
-	
-	setTimeout(() => {
-		displayResult.style.display = 'flex';
-		secondScreen.style.marginLeft = '200px';
-		secondScreen.style.width = '936px';
-		whoPickedWhat.style.marginLeft = '235px';
-		whoPickedWhat.style.width = '870px';
-	}, 1500);
-
-});
-
-rockDiv.addEventListener('click', () => {
-	resetGame(); 
-	gameDiv.style.display = 'none';
-	whoPickedWhat.style.display = 'flex';
-	secondScreen.style.display = 'flex';
-	generateRockDiv();
-
-	const blackboxDiv = document.createElement('div');
-	blackboxDiv.className = 'blackbox';
-	secondScreen.appendChild(blackboxDiv);
-
-	setTimeout(() => {
-		blackboxDiv.style.display = "none";
-	}, 500)
-
-	const displayResult = document.createElement('div');
-	displayResult.className = 'result-display';
-	let h2 = document.createElement('h2');
-	h2.innerHTML = '';
-	
-	displayButton.textContent = 'Play Again';
-	displayResult.appendChild(h2);
-	displayResult.appendChild(displayButton);
-	secondScreen.appendChild(displayResult);
-
-	setTimeout(() => {
-		const result = generateComputerDiv();
-		if (result === 'scissors') {
-			h2.innerHTML = 'You won';
-			secondScreen.firstChild.classList.add('ripple-effect');
-			score.innerHTML = ++initialScore;
-		} else if (result === 'paper') {
-			h2.innerHTML = 'You lost';
-			score.innerHTML = --initialScore;
-			secondScreen.lastChild.classList.add('ripple-effect');
-		} else {
-			h2.innerHTML = 'There is a tie';
-		}
-	}, 1000);
-
-	setTimeout(() => {
-		displayResult.style.display = 'flex';
-		secondScreen.style.marginLeft = '200px';
-		secondScreen.style.width = '936px';
-		whoPickedWhat.style.marginLeft = '235px';
-		whoPickedWhat.style.width = '870px';
-	}, 1500);
-	
-});
-
-displayButton.addEventListener('click', () => {
-	console.log("Display Button has been clicked");
-	secondScreen.style.display = 'none';
-	whoPickedWhat.style.display = 'none';
-	gameDiv.style.display = 'block';
-
-	// Revert all these styles back to their previous shapes
-	secondScreen.style.marginLeft = '385px';
-	secondScreen.style.width = '622px';
-	whoPickedWhat.style.marginLeft = '421px';
-	whoPickedWhat.style.width = '550px';
-});
-
-// rules.addEventListener('click', () => {
-// 	console.log("I have been clicked");
-
-// 	const rulesImage = document.createElement('img');
-// 	rulesImage.src = './images/image-rules.svg';
-// 	rulesImage.alt = 'Rules';
-// 	rulesImage.className = 'rules-image';
-// 	rules.appendChild(rulesImage);
-// })
-
-function generateComputerDiv() {
-	let randomNumber = Math.floor(Math.random() * 3)
-	let computerChoice;
-	switch (randomNumber) {
-		case 0: 
-			generateRockDiv();
-			computerChoice= 'rock'
-			break;
-		case 1:
-			generatePaperDiv();
-			computerChoice = 'paper';
-			break;
-		case 2: 
-			generateScissorsDiv();
-			computerChoice = 'scissors';
-			break;
-	}
-	return computerChoice;
-}
-
-function generatePaperDiv() {
-	// Generate paperDiv
-	const paperDiv = document.createElement('div');
-	const paperImg = document.createElement('img');
-	paperImg.src = './my_images/paperDiv.svg';
-	paperImg.alt = 'Paper';
-	paperDiv.appendChild(paperImg);
-
-	secondScreen.appendChild(paperDiv);
-	paperDiv.style.transform = 'scale(1.5)'
-
-}
-
-function generateScissorsDiv() {
-	// Generate scissorsDiv
-	const scissorsDiv = document.createElement('div');
-	const scissorsImg = document.createElement('img');
-	scissorsImg.src = './my_images/scissorsDiv.svg';
-	scissorsImg.alt = 'Scissors';
-	scissorsDiv.appendChild(scissorsImg);
-	
-	scissorsDiv.classList.add('smaller');
-	secondScreen.appendChild(scissorsDiv);
-	scissorsDiv.style.transform = 'scale(1.5)'
-	
-}
-
-function generateRockDiv() {
-	// Generate rockDiv
-	const rockDiv = document.createElement('div');
-	const rockImg = document.createElement('img');
-	rockImg.src = './my_images/rockDiv.svg';
-	rockImg.alt = 'Rock';
-	rockDiv.appendChild(rockImg);
-
-	secondScreen.appendChild(rockDiv);
-	
-	rockDiv.style.transform = 'scale(1.5)'
-}
-
-function resetGame() {
-	// Remove the paperDiv, scissorsDiv, and rockDiv from the secondScreen
-	while (secondScreen.firstChild) {
-	  secondScreen.removeChild(secondScreen.firstChild);
-	}
+  function choose(choice) {
+    const aichoice = aiChoose();
+    displayResults([choice, aichoice]);
+    displayWinner([choice, aichoice]);
   }
   
-
-
+  function aiChoose() {
+    const rand = Math.floor(Math.random() * CHOICES.length);
+    return CHOICES[rand];
+  }
+  
+  function displayResults(results) {
+    resultDivs.forEach((resultDiv, idx) => {
+      setTimeout(() => {
+        resultDiv.innerHTML = `
+          <div class="choice ${results[idx].name}">
+            <img src="images/icon-${results[idx].name}.svg" alt="${results[idx].name}" />
+          </div>
+        `;
+      }, idx * 500);
+    });
+  
+    gameDiv.classList.toggle("hidden");
+    resultsDiv.classList.toggle("hidden");
+  }
+  
+  function displayWinner(results) {
+    setTimeout(() => {
+      const userWins = isWinner(results);
+      const aiWins = isWinner(results.reverse());
+  
+      if (userWins) {
+        resultText.innerText = "you win";
+        resultDivs[0].classList.toggle("winner");
+        keepScore(1);
+      } else if (aiWins) {
+        resultText.innerText = "you lose";
+        resultDivs[1].classList.toggle("winner");
+        keepScore(-1);
+      } else {
+        resultText.innerText = "draw";
+      }
+      resultWinner.classList.toggle("hidden");
+      resultsDiv.classList.toggle("show-winner");
+    }, 1000);
+  }
+  
+  function isWinner(results) {
+    return results[0].beats === results[1].name;
+  }
+  
+  function keepScore(point) {
+    score += point;
+    scoreNumber.innerText = score;
+  }
+  
+  // Play Again
+  playAgainBtn.addEventListener("click", () => {
+    gameDiv.classList.toggle("hidden");
+    resultsDiv.classList.toggle("hidden");
+  
+    resultDivs.forEach((resultDiv) => {
+      resultDiv.innerHTML = "";
+      resultDiv.classList.remove("winner");
+    });
+  
+    resultText.innerText = "";
+    resultWinner.classList.toggle("hidden");
+    resultsDiv.classList.toggle("show-winner");
+  });
+  
+  // Show/Hide Rules
+  btnRules.addEventListener("click", () => {
+    modalRules.classList.toggle("show-modal");
+  });
+  btnClose.addEventListener("click", () => {
+    modalRules.classList.toggle("show-modal");
+  });
+  

@@ -1,54 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600;700&family=Barlow:wght@400;500;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
-  <title>Frontend Mentor | Rock, Paper, Scissors</title>
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="main.js" defer></script>
 
-</head>
-<body>
-  <div class="header">
-    <img src="./images/logo.svg" alt="Game Logo" >
+    <title>Frontend Mentor | Rock, Paper, Scissors</title>
+  </head>
+  <body class="preload">
+    <div class="container">
+      <header class="header">
+        <img src="./images/logo.svg" alt="logo" class="logo" />
+        <div class="score">
+          <div class="score__title">score</div>
+          <div class="score__number">0</div>
+        </div>
+      </header>
+      <section class="game">
+        <button class="choice-btn" data-choice="paper">
+          <div class="choice paper">
+            <img src="./images/icon-paper.svg" alt="Paper" />
+          </div>
+        </button>
+        <button class="choice-btn" data-choice="scissors">
+          <div class="choice scissors">
+            <img src="./images/icon-scissors.svg" alt="Scissors" />
+          </div>
+        </button>
+        <button class="choice-btn" data-choice="rock">
+          <div class="choice rock">
+            <img src="./images/icon-rock.svg" alt="Rock" />
+          </div>
+        </button>
+      </section>
+    </div>
 
-    <div class="scorecard">
-      <div class="scorecard-content">
-        <p class="score-text">SCORE</p>
-        <h1 id="score" class="score-num">0</h1>
+    <section class="results hidden">
+      <h2 class="results__heading">you picked</h2>
+      <h2 class="results__heading">the house picked</h2>
+      <div class="results__result"></div>
+      <div class="results__winner hidden">
+        <h3 class="results__text"></h3>
+        <button class="play-again">play again</button>
       </div>
-    </div>
-  </div>
+      <div class="results__result"></div>
+    </section>
 
-  <div class="who-picked-what">
-    <p>You Picked</p>
-    <p>The House Picked</p>
-  </div>
-
-  <div id="game">
-    <!-- <img src="./images/bg-triangle.svg" alt="Rock" class="image-triangle">
-    <div class="paper">
-      <img src="./my_images/paperDiv.svg" alt="Paper">
-    </div>
-    <div class="scissors">
-      <img src="./my_images/scissorsDiv.svg" alt="Scissors">
-    </div>
-    <div class="rock">
-      <img src="./my_images/rockDiv.svg" alt="Rock">
-    </div> -->
-  </div>
-  
-  <div id="second-screen"></div>
-  
-   <!-- <div class="rules">
-    <button>Rules</button>
-  </div>  -->
-
-  <button class="rules-btn" tabindex="1">rules</button>
+    <button class="rules-btn" tabindex="1">rules</button>
     <div class="modal">
       <div class="modal__container">
         <header class="modal__header">
@@ -65,30 +71,5 @@
       </div>
     </div>
 
-
-  <script src="./main.js"></script>
-</body>
+  </body>
 </html>
-
-
- <!-- Score
-  
-  The House Picked
-
-  You Win
-  You Lose
-
-  Play Again -->
-
-<!-- <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
-  </div> -->
-
- <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <!-- I could make use of this code later -->
-
-  <!-- <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style> -->
